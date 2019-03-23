@@ -5,7 +5,7 @@ interface
 Uses PersistenciaUn, System.Classes, LibUtils, SysUtils;
 
 Type
-  TIdTipoPessoa = (ttFisica, ttJuridica);
+  TIdTipoPessoa = (ttFisica=1, ttJuridica=2);
 
   TTipoPessoa = class(TDGRSimpleDataSet)
   private

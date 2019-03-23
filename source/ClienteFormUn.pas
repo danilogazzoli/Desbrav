@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, TemplateCadastroUn, System.Actions,
-  Vcl.ActnList, Vcl.StdCtrls, Vcl.Mask, Vcl.ComCtrls, ClienteControllerUn;
+  Vcl.ActnList, Vcl.StdCtrls, Vcl.Mask, Vcl.ComCtrls, ClienteControllerUn, System.UITypes;
 
 type
   TClienteForm = class(TCadastroTemplateFormUn)
@@ -27,12 +27,16 @@ type
     Cidade: TLabel;
     UFEdit: TMaskEdit;
     Label6: TLabel;
+    IDEdit: TMaskEdit;
+    Label7: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure NovoActionExecute(Sender: TObject);
     procedure SalvarActionExecute(Sender: TObject);
     procedure CodigoEditKeyPress(Sender: TObject; var Key: Char);
     procedure lbxPesquisaDblClick(Sender: TObject);
+    procedure CancelarActionExecute(Sender: TObject);
+    procedure ExcluirActionExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -62,6 +66,8 @@ end;
 procedure TClienteForm.lbxPesquisaDblClick(Sender: TObject);
 begin
   inherited;
+  lbxPesquisa.Clear;
+  CodigoEdit.Clear;
   pgcCadastro.ActivePageIndex := 0;
   Self.PopulateControls;
 end;
@@ -76,6 +82,16 @@ begin
   end;
 end;
 
+procedure TClienteForm.ExcluirActionExecute(Sender: TObject);
+begin
+  inherited;
+  if MessageDlg('Deseja realmente excluir?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    FController.Delete;
+    Self.ClearControls;
+  end;
+end;
+
 procedure TClienteForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
@@ -83,13 +99,22 @@ begin
 end;
 
 
+procedure TClienteForm.CancelarActionExecute(Sender: TObject);
+begin
+  inherited;
+  Self.FController.CancelEdit;
+  Self.ClearControls;
+end;
+
 procedure TClienteForm.ClearControls;
 var
   _i: integer;
 begin
-  for _i := 0 to Self.ControlCount - 1 do
-    if Self.Controls[_i] is TMaskEdit then
-      TMaskEdit(Self.Controls[_i]).Clear;
+  for _i := 0 to Self.ComponentCount - 1 do
+  begin
+    if Self.Components[_i] is TMaskEdit then
+      TMaskEdit(Self.Components[_i]).Clear
+  end;
 end;
 
 procedure TClienteForm.PopulateControls;
@@ -104,6 +129,7 @@ begin
   ComplementoEdit.Text := Self.FController.Cliente.Complemento;
   CidadeEdit.Text := Self.FController.Cliente.Cidade;
   UFEdit.Text := Self.FController.Cliente.UF;
+  IDEdit.Text := Self.FController.Cliente.ID.ToString;
 end;
 
 procedure TClienteForm.SalvarActionExecute(Sender: TObject);
@@ -122,6 +148,7 @@ begin
     Self.FController.Cliente.UF := UFEdit.Text;
 
     Self.FController.Save;
+    IDEdit.Text := Self.FController.Cliente.ID.ToString;
   except
     on E: Exception do
     begin

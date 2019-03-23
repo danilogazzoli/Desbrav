@@ -18,6 +18,7 @@ Type
     property Cliente: TCliente read GetCliente;
     function Save: integer;
     procedure CancelEdit;
+    procedure Delete;
   end;
 
 implementation
@@ -29,6 +30,27 @@ constructor TClienteController.Create(AOwner: TComponent; aSQLConnection: TDGRSQ
 begin
   Self.FCliente := TCliente.Create(AOwner, aSQLConnection);
   Self.FDGRSQLConnection := aSQLConnection;
+end;
+
+procedure TClienteController.Delete;
+var
+  _Trans: TDBXTransaction;
+begin
+  _Trans := Self.FDGRSQLConnection.BeginTransaction;
+  try
+    if not Self.FCliente.IsEmpty then
+    begin
+      Self.FCliente.Delete;
+      Self.FCliente.ApplyUpdates(0);
+    end;
+    Self.FDGRSQLConnection.CommitFreeAndNil(_Trans);
+  except
+    on E: Exception do
+    begin
+      Self.FDGRSQLConnection.RollbackIncompleteFreeAndNil(_Trans);
+      Raise;
+    end;
+  end;
 end;
 
 destructor TClienteController.Destroy;

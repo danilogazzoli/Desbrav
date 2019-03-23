@@ -90,6 +90,8 @@ end;
 procedure TCliente.DoBeforePost;
 begin
   inherited;
+  Self.GetPessoa.Edit;
+  Self.GetPessoa.SetFieldValueAsInteger('IdTipoPessoa', Integer(ttFisica));
   Self.GetPessoa.Post;
 
   Self.Edit;
