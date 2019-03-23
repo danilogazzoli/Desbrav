@@ -6,12 +6,6 @@
         <Projects Include="source\Desbrav.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="E:\Project\source\Project.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="E:\Theos\EntidadesCalculo\source\EntidadesCalculo.dproj">
-            <Dependencies/>
-        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -29,32 +23,14 @@
     <Target Name="Desbrav:Make">
         <MSBuild Projects="source\Desbrav.dproj" Targets="Make"/>
     </Target>
-    <Target Name="Project">
-        <MSBuild Projects="E:\Project\source\Project.dproj"/>
-    </Target>
-    <Target Name="Project:Clean">
-        <MSBuild Projects="E:\Project\source\Project.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="Project:Make">
-        <MSBuild Projects="E:\Project\source\Project.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="EntidadesCalculo">
-        <MSBuild Projects="E:\Theos\EntidadesCalculo\source\EntidadesCalculo.dproj"/>
-    </Target>
-    <Target Name="EntidadesCalculo:Clean">
-        <MSBuild Projects="E:\Theos\EntidadesCalculo\source\EntidadesCalculo.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="EntidadesCalculo:Make">
-        <MSBuild Projects="E:\Theos\EntidadesCalculo\source\EntidadesCalculo.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Desbrav;Project;EntidadesCalculo"/>
+        <CallTarget Targets="Desbrav"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Desbrav:Clean;Project:Clean;EntidadesCalculo:Clean"/>
+        <CallTarget Targets="Desbrav:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Desbrav:Make;Project:Make;EntidadesCalculo:Make"/>
+        <CallTarget Targets="Desbrav:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
