@@ -128,6 +128,12 @@
         <DCCReference Include="ClienteUn.pas"/>
         <DCCReference Include="PessoaUn.pas"/>
         <DCCReference Include="ClienteControllerUn.pas"/>
+        <DCCReference Include="PessoaFormUn.pas">
+            <Form>PessoaForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="FornecedorUn.pas"/>
+        <DCCReference Include="FornecedorControllerUn.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

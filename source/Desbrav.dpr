@@ -11,7 +11,10 @@ uses
   DuplicataFormUn in 'DuplicataFormUn.pas' {DuplicataForm},
   ClienteUn in 'ClienteUn.pas',
   PessoaUn in 'PessoaUn.pas',
-  ClienteControllerUn in 'ClienteControllerUn.pas';
+  ClienteControllerUn in 'ClienteControllerUn.pas',
+  PessoaFormUn in 'PessoaFormUn.pas' {PessoaForm},
+  FornecedorUn in 'FornecedorUn.pas',
+  FornecedorControllerUn in 'FornecedorControllerUn.pas';
 
 {$R *.res}
 

@@ -20,7 +20,7 @@ object CadastroTemplateFormUn: TCadastroTemplateFormUn
     Top = 0
     Width = 608
     Height = 434
-    ActivePage = Cadastro
+    ActivePage = TabSheet2
     Align = alClient
     TabOrder = 0
     object Cadastro: TTabSheet
@@ -116,6 +116,7 @@ object CadastroTemplateFormUn: TCadastroTemplateFormUn
         Height = 310
         ItemHeight = 13
         TabOrder = 2
+        OnDblClick = lbxPesquisaDblClick
       end
     end
   end

@@ -32,8 +32,12 @@ type
     ExcluirButton: TButton;
     procedure SairActionExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure lbxPesquisaDblClick(Sender: TObject);
   private
     { Private declarations }
+  protected
+    procedure ClearControls; virtual;
+    procedure PopulateControls; virtual;
   public
     { Public declarations }
   end;
@@ -48,6 +52,29 @@ implementation
 procedure TCadastroTemplateFormUn.FormCreate(Sender: TObject);
 begin
   Self.pgcCadastro.ActivePageIndex := 0;
+end;
+
+procedure TCadastroTemplateFormUn.lbxPesquisaDblClick(Sender: TObject);
+begin
+  lbxPesquisa.Clear;
+  CodigoEdit.Clear;
+  pgcCadastro.ActivePageIndex := 0;
+  PopulateControls;
+end;
+
+procedure TCadastroTemplateFormUn.PopulateControls;
+begin
+end;
+
+procedure TCadastroTemplateFormUn.ClearControls;
+var
+  _i: integer;
+begin
+  for _i := 0 to Self.ComponentCount - 1 do
+  begin
+    if Self.Components[_i] is TMaskEdit then
+      TMaskEdit(Self.Components[_i]).Clear
+  end;
 end;
 
 procedure TCadastroTemplateFormUn.SairActionExecute(Sender: TObject);

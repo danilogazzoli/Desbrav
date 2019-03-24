@@ -5,44 +5,26 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, TemplateCadastroUn, System.Actions,
-  Vcl.ActnList, Vcl.StdCtrls, Vcl.Mask, Vcl.ComCtrls, ClienteControllerUn, System.UITypes;
+  Vcl.ActnList, Vcl.StdCtrls, Vcl.Mask, Vcl.ComCtrls, ClienteControllerUn, System.UITypes,
+  PessoaFormUn;
 
 type
-  TClienteForm = class(TCadastroTemplateFormUn)
-    CPFEdit: TMaskEdit;
-    NomeEdit: TMaskEdit;
-    Nome: TLabel;
-    LogradouroLabel: TLabel;
+  TClienteForm = class(TPessoaForm)
     NascimentoEdit: TDateTimePicker;
     Label1: TLabel;
-    LogradouroEdit: TMaskEdit;
-    Label2: TLabel;
-    BairroEdit: TMaskEdit;
-    Label3: TLabel;
-    NumeroEdit: TMaskEdit;
-    Label4: TLabel;
-    ComplementoEdit: TMaskEdit;
-    Label5: TLabel;
-    CidadeEdit: TMaskEdit;
-    Cidade: TLabel;
-    UFEdit: TMaskEdit;
-    Label6: TLabel;
-    IDEdit: TMaskEdit;
-    Label7: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure NovoActionExecute(Sender: TObject);
     procedure SalvarActionExecute(Sender: TObject);
     procedure CodigoEditKeyPress(Sender: TObject; var Key: Char);
-    procedure lbxPesquisaDblClick(Sender: TObject);
     procedure CancelarActionExecute(Sender: TObject);
     procedure ExcluirActionExecute(Sender: TObject);
 
   private
     { Private declarations }
     FController: TClienteController;
-    procedure ClearControls;
-    procedure PopulateControls;
+  protected
+    procedure PopulateControls; override;
 
   public
     { Public declarations }
@@ -63,13 +45,10 @@ begin
   FController := TClienteController.Create(Self, TDGRSQLConnection.getInstance );
 end;
 
-procedure TClienteForm.lbxPesquisaDblClick(Sender: TObject);
+procedure TClienteForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
-  lbxPesquisa.Clear;
-  CodigoEdit.Clear;
-  pgcCadastro.ActivePageIndex := 0;
-  Self.PopulateControls;
+  FController.Free;
 end;
 
 procedure TClienteForm.CodigoEditKeyPress(Sender: TObject; var Key: Char);
@@ -92,29 +71,11 @@ begin
   end;
 end;
 
-procedure TClienteForm.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  inherited;
-  FController.Free;
-end;
-
-
 procedure TClienteForm.CancelarActionExecute(Sender: TObject);
 begin
   inherited;
   Self.FController.CancelEdit;
   Self.ClearControls;
-end;
-
-procedure TClienteForm.ClearControls;
-var
-  _i: integer;
-begin
-  for _i := 0 to Self.ComponentCount - 1 do
-  begin
-    if Self.Components[_i] is TMaskEdit then
-      TMaskEdit(Self.Components[_i]).Clear
-  end;
 end;
 
 procedure TClienteForm.PopulateControls;
@@ -166,7 +127,7 @@ begin
   if NomeEdit.CanFocus then
     NomeEdit.SetFocus;
 
-  Self.FController.Cliente.LoadById(-1);
+  Self.FController.LoadClienteByID(-1);
 end;
 
 
