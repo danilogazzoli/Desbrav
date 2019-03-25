@@ -134,6 +134,16 @@
         </DCCReference>
         <DCCReference Include="FornecedorUn.pas"/>
         <DCCReference Include="FornecedorControllerUn.pas"/>
+        <DCCReference Include="DuplicataUn.pas"/>
+        <DCCReference Include="DuplicataControllerUn.pas"/>
+        <DCCReference Include="ReceberFormUn.pas">
+            <Form>ReceberForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="PagarFormUn.pas">
+            <Form>PagarForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

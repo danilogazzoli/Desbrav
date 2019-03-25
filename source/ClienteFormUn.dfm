@@ -7,6 +7,7 @@ inherited ClienteForm: TClienteForm
   TextHeight = 13
   inherited pgcCadastro: TPageControl
     Height = 303
+    ActivePage = Cadastro
     ExplicitHeight = 303
     inherited Cadastro: TTabSheet
       ExplicitHeight = 275

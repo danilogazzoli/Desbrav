@@ -14,11 +14,14 @@ type
     Exerccio21: TMenuItem;
     Exerccio31: TMenuItem;
     Exerccio41: TMenuItem;
+    Receber1: TMenuItem;
+    Pagar1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure Exerccio11Click(Sender: TObject);
     procedure Exerccio21Click(Sender: TObject);
     procedure Exerccio31Click(Sender: TObject);
-    procedure Exerccio41Click(Sender: TObject);
+    procedure Receber1Click(Sender: TObject);
+    procedure Pagar1Click(Sender: TObject);
   private
     procedure HandleApplicationExceptions(Sender: TObject; E: Exception);
     procedure CriarForm(const aClasseForm: String);
@@ -49,11 +52,6 @@ begin
   Self.CriarForm('TProdutoForm');
 end;
 
-procedure TMainForm.Exerccio41Click(Sender: TObject);
-begin
-  Self.CriarForm('TDuplicataForm');
-end;
-
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
   self.WindowState := wsMaximized;
@@ -64,6 +62,16 @@ end;
 procedure TMainForm.HandleApplicationExceptions(Sender: TObject; E: Exception);
 begin
    MessageDlg('Houve um erro: ' + E.Message, mtWarning, [mbOk],0 )
+end;
+
+procedure TMainForm.Pagar1Click(Sender: TObject);
+begin
+  Self.CriarForm('TPagarForm');
+end;
+
+procedure TMainForm.Receber1Click(Sender: TObject);
+begin
+  Self.CriarForm('TReceberForm');
 end;
 
 procedure TMainForm.CriarForm(const aClasseForm : String);

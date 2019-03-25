@@ -2,7 +2,7 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   Caption = 'Principal - Avalia'#231#227'o T'#233'cnica Danilo Gazzoli Resende'
-  ClientHeight = 181
+  ClientHeight = 161
   ClientWidth = 536
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -33,8 +33,15 @@ object MainForm: TMainForm
         OnClick = Exerccio31Click
       end
       object Exerccio41: TMenuItem
-        Caption = 'Duplicata'
-        OnClick = Exerccio41Click
+        Caption = '-'
+      end
+      object Receber1: TMenuItem
+        Caption = 'Receber'
+        OnClick = Receber1Click
+      end
+      object Pagar1: TMenuItem
+        Caption = 'Pagar'
+        OnClick = Pagar1Click
       end
     end
   end
